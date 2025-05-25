@@ -1,0 +1,7 @@
+.terraform*
+terraform.tfstate
+terraform.tfstate.backup
+.terraform.lock.hcl
+# Local .terraform directories
+package/
+lambda.zip
