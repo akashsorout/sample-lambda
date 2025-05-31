@@ -1,0 +1,28 @@
+name: build
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+
+      - name: Set up environment (if needed)
+        run: |
+          echo "Setting up environment..."
+          pwd
+          mkdir -p package
+
+      - name: Build application
+        run: zip -r "lambda.zip" package/
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: lambda.zip
+          overwrite: true
