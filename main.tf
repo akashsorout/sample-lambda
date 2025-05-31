@@ -50,12 +50,7 @@ resource "aws_iam_role_policy_attachment" "lambda_sqs_attach" {
   policy_arn = aws_iam_policy.lambda_sqs_policy.arn
 }
 
-# zip file creation for deployment of python code
-data "archive_file" "lambda_zip" {
-  type        = "zip"
-  source_file = "lambda_function.py"
-  output_path = "lambda.zip"
-}
+
 
 # Create a Lambda Function
 resource "aws_lambda_function" "lambda" {
