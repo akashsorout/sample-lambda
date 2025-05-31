@@ -6,9 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout feature branch
+      - name: Checkout branch
         uses: actions/checkout@v4
 
       - name: Set up environment (if needed)
@@ -18,7 +17,9 @@ jobs:
           mkdir -p package
 
       - name: Build application
-        run: zip -r "lambda.zip" package/
+        run: |
+          cp lambda_function.py package/
+          zip -r "lambda.zip" package/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
