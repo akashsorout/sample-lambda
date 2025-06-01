@@ -32,4 +32,9 @@ jobs:
         run: terraform validate
 
       - name: Apply Terraform configuration
-        run: echo "terraform apply -auto-approve"
+        run: terraform apply -auto-approve
+
+      - name: Destroy Terraform resources
+        if: github.event_name == 'workflow_dispatch'
+        run: terraform destroy -auto-approve
+      
