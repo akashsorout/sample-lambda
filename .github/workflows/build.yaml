@@ -1,0 +1,35 @@
+name: build
+on:
+  workflow_call:
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+
+      - name: Set up environment (if needed)
+        run: |
+          echo "Setting up environment..."
+          pwd
+          mkdir -p package
+
+      - name: Build application
+        run: |
+          python --version
+          pip --version
+          cp lambda_function.py package/
+          ls -l package/
+          pip install -r requirements.txt -t package/ --upgrade
+          cd package
+          zip -r "lambda.zip" *
+          mv lambda.zip ../
+          rm -rf package
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: lambda.zip
+          overwrite: true

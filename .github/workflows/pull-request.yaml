@@ -1,29 +1,10 @@
-name: build
+name: pull_request
+# This workflow is triggered on pull requests to the master branch.
+# It builds the application and uploads the artifacts for review.
 on:
   pull_request:
     branches:
       - master
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout branch
-        uses: actions/checkout@v4
-
-      - name: Set up environment (if needed)
-        run: |
-          echo "Setting up environment..."
-          pwd
-          mkdir -p package
-
-      - name: Build application
-        run: |
-          cp lambda_function.py package/
-          zip -r "lambda.zip" package/
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: lambda.zip
-          overwrite: true
+  build_for_pull_request:
+    uses: ./.github/workflows/build.yaml
