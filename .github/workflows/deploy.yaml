@@ -27,7 +27,7 @@ jobs:
           # Role has been created in AWS IAM that allows GitHub Actions to assume the role and access AWS resources.
           role-to-assume: arn:aws:iam::836633177159:role/github-ci-access-role
           # duration-seconds is the time in seconds that the temporary credentials will be valid, defult is 3600 seconds (1 hour).
-          role-duration-seconds: 300 # 5 minutes
+          role-duration-seconds: 900 # 15 minutes (Min)
           aws-region: ap-south-1
 
       - name: Set up Terraform
